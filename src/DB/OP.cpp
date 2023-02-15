@@ -11,28 +11,27 @@ using namespace DB;
 
 const std::string DB::opStr(OP op)
 {
-    using enum OP;
     switch (op)
     {
-        case EQ:
+        case OP::EQ:
             return "=";
-        case NEQ:
+        case OP::NEQ:
             return "!=";
-        case GT:
+        case OP::GT:
             return ">";
-        case GTE:
+        case OP::GTE:
             return ">=";
-        case LT:
+        case OP::LT:
             return "<";
-        case LTE:
+        case OP::LTE:
             return "<=";
-        case IN:
+        case OP::IN:
             return "IN";
-        case CONTAINS:
+        case OP::CONTAINS:
             return "LIKE";
-        case STARTSWITH:
+        case OP::STARTSWITH:
             return "LIKE";
-        case ENDSWITH:
+        case OP::ENDSWITH:
             return "LIKE";
     }
 }

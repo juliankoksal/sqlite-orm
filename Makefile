@@ -1,7 +1,7 @@
 # VARIABLES
 
 CXX = g++
-CXXFLAGS = -std=c++20 -I$(SRC_DIR)
+CXXFLAGS = -std=c++17 -I$(SRC_DIR)
 LDFLAGS = 
 LDLIBS = -lsqlite3
 

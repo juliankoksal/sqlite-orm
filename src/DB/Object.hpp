@@ -33,9 +33,9 @@ private:
     virtual const std::string& table() const = 0;
     
     /**
-     * @brief Gets the columns of the table.
+     * @brief Gets the columns of the table in the correct order.
      *
-     * @return table columns
+     * @return table columns in the correct order
      */
     virtual const std::vector<std::string>& columns() const = 0;
     
