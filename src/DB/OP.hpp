@@ -13,6 +13,9 @@
 namespace DB
 {
 
+/**
+ * @brief Represents a comparison operator for query conditions.
+ */
 enum class OP : const char
 {
     EQ,
@@ -27,6 +30,13 @@ enum class OP : const char
     ENDSWITH
 };
 
+/**
+ * @brief Gets string representation of the operator as an SQLite operator.
+ *
+ * @param op operator
+ *
+ * @return string representation of operator as an SQLite operator
+ */
 const std::string opStr(OP op);
 
 }

@@ -1,5 +1,5 @@
 //
-//  Test.cpp
+//  Example.cpp
 //  SQLite3 Data Access Layer
 //
 //  Created by Julian Koksal on 2023-02-12.

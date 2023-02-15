@@ -8,7 +8,7 @@ LDLIBS = -lsqlite3
 SRC_DIR = src
 OBJ_DIR = target
 
-MAIN = Test
+MAIN = Example
 MAIN_OBJ = $(patsubst %,$(OBJ_DIR)/%.o,$(MAIN))
 OBJ = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(shell find $(SRC_DIR) -name "*.cpp"))
 MKDIR_P = @ mkdir -p $(@D)
