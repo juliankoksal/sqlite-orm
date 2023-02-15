@@ -70,28 +70,28 @@ int main(int argc, const char* argv[])
     printMenu(menu, "Menu, sorted by ascending price, then name:");
 
     menu = db.select(MenuItem(), {
-        DB::Condition("price", DB::Op::gte, 3.00),
-        DB::Condition("price", DB::Op::lt, 10.00)
+        DB::Condition("price", DB::OP::GTE, 3.00),
+        DB::Condition("price", DB::OP::LT, 10.00)
     }, "price DESC");
     printMenu(menu, "Menu where 3.00 <= price < 10.00, sorted by descending price:");
 
     menu = db.select(MenuItem(), {
-        DB::Condition("name", DB::Op::eq, "Cookie")
+        DB::Condition("name", DB::OP::EQ, "Cookie")
     });
     printMenu(menu, "Menu where name = 'cookie', unsorted:");
 
     menu = db.select(MenuItem(), {
-        DB::Condition("name", DB::Op::startswith, "co")
+        DB::Condition("name", DB::OP::STARTSWITH, "co")
     });
     printMenu(menu, "Menu where name starts with 'co', unsorted:");
 
     menu = db.select(MenuItem(), {
-        DB::Condition("name", DB::Op::contains, "combo")
+        DB::Condition("name", DB::OP::CONTAINS, "combo")
     }, "price");
     printMenu(menu, "Menu where name contains 'combo', sorted by ascending price.");
 
     menu = db.select(MenuItem(), {
-        DB::Condition("name", DB::Op::in, std::vector<std::string>({
+        DB::Condition("name", DB::OP::IN, std::vector<std::string>({
             "Coffee", "Latte"
         }))
     });
@@ -108,7 +108,7 @@ int main(int argc, const char* argv[])
 
     MenuItem updatedModel = MenuItem("", 29.99);
     db.updateWhere(updatedModel, {
-        DB::Condition("price", DB::Op::gt, 9.99)
+        DB::Condition("price", DB::OP::GT, 9.99)
     }, {"price"});
     menu = db.select(MenuItem());
     printMenu(menu, "Menu after price was updated to 29.99 where price > 9.99, unsorted:");
@@ -122,7 +122,7 @@ int main(int argc, const char* argv[])
     printMenu(menu, "Menu after Lunch Combo 2 was deleted, unsorted:");
 
     db.destroyWhere(MenuItem(), {
-        DB::Condition("price", DB::Op::lte, 5.00)
+        DB::Condition("price", DB::OP::LTE, 5.00)
     });
     menu = db.select(MenuItem());
     printMenu(menu, "Menu after everything with price <= 5.00 was deleted, unsorted:");

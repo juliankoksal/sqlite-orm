@@ -1,13 +1,12 @@
 # VARIABLES
 
 CXX = g++
-CXXFLAGS = -std=c++20
+CXXFLAGS = -std=c++20 -I$(SRC_DIR)
 LDFLAGS = 
 LDLIBS = -lsqlite3
 
 SRC_DIR = src
 OBJ_DIR = target
-OUT_DIR = .
 
 MAIN = Test
 MAIN_OBJ = $(patsubst %,$(OBJ_DIR)/%.o,$(MAIN))
@@ -22,14 +21,14 @@ MKDIR_P = @ mkdir -p $(@D)
 
 # EXECUTABLES
 
-all: $(patsubst %,$(OBJ_DIR)/%,$(MAIN))
+all: $(MAIN)
 
-$(OBJ_DIR)/%: $(filter-out $(MAIN_OBJ),$(OBJ)) $(OBJ_DIR)/%.o
-	$(CXX) $(LDFLAGS) $^ -o $(patsubst %,$(OUT_DIR)/%,$(notdir $@)) $(LDLIBS)
+$(MAIN): %: $(filter-out $(MAIN_OBJ),$(OBJ)) $(shell find $(OBJ_DIR) -name "%.o")
+	$(CXX) $(LDFLAGS) $^ -o $@ $(LDLIBS)
 
 # OBJECTS
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+$(OBJ): $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(MKDIR_P)
 	$(CXX) $(CXXFLAGS) -MMD -MP -c $< -o $@
 
@@ -40,7 +39,7 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 clean: cleanout cleanobj
 
 cleanout:
-	rm -f $(patsubst %,$(OUT_DIR)/%,$(notdir $(MAIN)))
+	rm -f $(MAIN)
 
 cleanobj:
 	rm -rf $(OBJ_DIR)

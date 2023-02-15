@@ -14,43 +14,31 @@
 #include <string>
 #include <vector>
 
+#include "OP.hpp"
+
 namespace DB
 {
-
-enum class Op : char
-{
-    eq,
-    neq,
-    gt,
-    gte,
-    lt,
-    lte,
-    in,
-    contains,
-    startswith,
-    endswith
-};
 
 class Condition
 {
     friend class Handle;
 public:
-    Condition(const std::string& field, const Op op, const std::int64_t value);
+    Condition(const std::string& field, const OP op, const std::int64_t value);
     
-    Condition(const std::string& field, const Op op, const double value);
+    Condition(const std::string& field, const OP op, const double value);
     
-    Condition(const std::string& field, const Op op, const std::string& value);
+    Condition(const std::string& field, const OP op, const std::string& value);
     
-    Condition(const std::string& field, const Op op,
-              const std::vector<std::string>& value);
-    
-    Condition(const std::string& field, const Op op,
+    Condition(const std::string& field, const OP op,
               const std::vector<std::int64_t>& value);
+    
+    Condition(const std::string& field, const OP op,
+              const std::vector<std::string>& value);
     
 private:
     std::string field;
     
-    Op op;
+    OP op;
     
     std::any value;
     

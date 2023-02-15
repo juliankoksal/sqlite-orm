@@ -13,12 +13,14 @@
 #include <map>
 #include <set>
 #include <string>
+#include <typeinfo>
 #include <vector>
 
 #include <sqlite3.h>
 
 #include "Condition.hpp"
 #include "Object.hpp"
+#include "OP.hpp"
 
 namespace DB
 {
@@ -28,7 +30,11 @@ class Handle
 public:
     Handle(const std::string fileName);
     
+    Handle(const Handle& other) = delete;
+    
     ~Handle();
+    
+    Handle& operator=(const Handle& other) = delete;
     
     template<class T, class = std::enable_if<std::is_base_of<Object, T>::value>>
     std::vector<T> select(const T& dbObject,
@@ -69,17 +75,15 @@ private:
                                       const std::string &orderBy,
                                       const std::set<std::string>& columns) const;
     
-    sqlite3_stmt* prepareStatement(const std::string& query,
-                                   const std::string& queryType) const;
+    sqlite3_stmt* prepareStatement(const std::string& query) const;
     
     void bindStatementColumns(sqlite3_stmt* statement, const Object& dbObject,
                               const std::vector<std::string>& columns,
-                              int& index, const std::string& queryType) const;
+                              int& index, const bool isInsert = false) const;
     
     void bindStatementConditions(sqlite3_stmt* statement,
                                  const std::vector<Condition>& conditions,
-                                 int& index,
-                                 const std::string &queryType) const;
+                                 int& index) const;
     
     void finalizeStatement(sqlite3_stmt *statement,
                            const std::string& errorMessage) const;
@@ -91,8 +95,6 @@ private:
     static std::string generateWhereClauseFromConditions(const std::vector<Condition>& conditions);
     
     static std::string generateWhereClauseFromKeys(const std::vector<std::string>& keys);
-    
-    static const std::string opStr(Op op);
 };
 
 }
