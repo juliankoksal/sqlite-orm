@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS MenuItem (
+    name TEXT NOT NULL PRIMARY KEY,
+    price REAL NOT NULL
+);

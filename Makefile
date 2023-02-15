@@ -25,6 +25,7 @@ all: $(MAIN)
 
 $(MAIN): %: $(filter-out $(MAIN_OBJ),$(OBJ)) $(shell find $(OBJ_DIR) -name "%.o")
 	$(CXX) $(LDFLAGS) $^ -o $@ $(LDLIBS)
+	sqlite3 data.db < exampleTable.sql
 
 # OBJECTS
 
