@@ -18,16 +18,16 @@ namespace DB
  */
 enum class OP : const char
 {
-    EQ,
-    NEQ,
-    GT,
-    GTE,
-    LT,
-    LTE,
+    EQ,         // =
+    NEQ,        // !=
+    GT,         // >
+    GTE,        // >=
+    LT,         // <
+    LTE,        // <=
     IN,
-    CONTAINS,
-    STARTSWITH,
-    ENDSWITH
+    CONTAINS,   // LIKE '%foo%'
+    STARTSWITH, // LIKE 'foo%'
+    ENDSWITH    // LIKE '%foo'
 };
 
 /**

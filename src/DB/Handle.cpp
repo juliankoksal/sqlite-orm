@@ -52,7 +52,7 @@ void Handle::update(const Object& dbObject) const
     const std::set<std::string>& keys = dbObject.keys();
     if (keys.empty())
     {
-        throw std::runtime_error("Error in call to DBHelper::update(). '"
+        throw std::runtime_error("Error in call to DB::Handle::update(). '"
                                  + dbObject.table() + "' has no keys.");
     }
     
@@ -139,7 +139,7 @@ void Handle::destroy(const Object& dbObject) const
     const std::set<std::string>& keys = dbObject.keys();
     if (keys.empty())
     {
-        throw std::runtime_error("Error in call to DBHelper::destroy(). '"
+        throw std::runtime_error("Error in call to DB::Handle::destroy(). '"
                                  + dbObject.table() + "' has no keys.");
     }
     

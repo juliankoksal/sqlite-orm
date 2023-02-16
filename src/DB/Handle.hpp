@@ -77,11 +77,13 @@ public:
                                                                conditions,
                                                                orderBy,
                                                                columns);
-        std::vector<T> result(helperResult.size());
-        std::transform(helperResult.cbegin(), helperResult.cend(),
-                       result.begin(), [](Object* o){
-            return *((T*)o);
-        });
+        std::vector<T> result;
+        for (auto it = helperResult.begin(); it != helperResult.end(); ++it)
+        {
+            T* row = (T*)(*it);
+            result.push_back(*row);
+            delete row;
+        }
         return result;
     }
     
@@ -198,7 +200,7 @@ private:
      * @brief Finalizes the statement.
      *
      * @param statement statement to finalize
-     * @param errorMessage message printed if an error occurred when the statement was ran
+     * @param errorMessage message printed if an error occurred when the statement was run
      */
     void finalizeStatement(sqlite3_stmt *statement,
                            const std::string& errorMessage) const;

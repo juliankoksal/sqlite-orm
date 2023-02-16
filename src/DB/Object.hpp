@@ -24,6 +24,9 @@ namespace DB
 class Object
 {
     friend class Handle;
+public:
+    virtual ~Object() = default;
+    
 private:
     /**
      * @brief Gets the name of the table.

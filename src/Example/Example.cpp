@@ -56,7 +56,7 @@ int main(int argc, const char* argv[])
      */
 
     std::vector<MenuItem> menu;
-
+    
     menu = db.select(MenuItem());
     printMenu(menu, "Menu, unsorted:");
 
