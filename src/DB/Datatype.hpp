@@ -12,6 +12,7 @@
 #include <cstdint>
 #include <string>
 #include <typeinfo>
+#include <type_traits>
 #include <vector>
 
 namespace DB
@@ -68,7 +69,11 @@ public:
      *
      * @return underlying value any casted to T
      */
-    template <class T>
+    template <class T, class = std::enable_if<std::is_same<T, std::int64_t>::value
+                                              || std::is_same<T, double>::value
+                                              || std::is_same<T, std::string>::value
+                                              || std::is_same<T, std::vector<std::int64_t>>::value
+                                              || std::is_same<T, std::vector<std::string>>::value>>
     const T cast() const
     {
         return std::any_cast<T>(value_);

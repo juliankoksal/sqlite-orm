@@ -8,12 +8,12 @@
 #ifndef Handle_hpp
 #define Handle_hpp
 
-#include <algorithm>
 #include <cstdint>
 #include <map>
 #include <set>
 #include <string>
 #include <typeinfo>
+#include <type_traits>
 #include <vector>
 
 #include <sqlite3.h>

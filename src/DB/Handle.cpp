@@ -290,6 +290,7 @@ void Handle::bindStatementColumns(sqlite3_stmt* statement,
         {
             const Datatype columnValue = mMap[*it];
             const std::type_info& attrType = columnValue.type();
+            
             if (attrType == typeid(std::int64_t))
             {
                 result = sqlite3_bind_int64(statement, index,
